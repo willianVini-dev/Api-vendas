@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/share/http/server.ts",
     "lint": "eslint . --ext .ts",
-    "lintFix": "eslint . --ext .ts --fix"
+    "lintFix": "eslint . --ext .ts --fix",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },
   "author": "",
   "license": "ISC",
