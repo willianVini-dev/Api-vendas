@@ -8,7 +8,7 @@
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/share/http/server.ts",
     "lint": "eslint . --ext .ts",
     "lintFix": "eslint . --ext .ts --fix",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli"
   },
   "author": "",
   "license": "ISC",
