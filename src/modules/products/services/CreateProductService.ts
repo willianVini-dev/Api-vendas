@@ -15,8 +15,13 @@ export class createProductService {
 
     if (productExists) throw new appError("Produto já existente");
 
-    const newProduct = productsRepository.create({ name, price, quantity });
+    const newProduct = productsRepository.create({
+      name,
+      price,
+      quantity,
+    });
     await productsRepository.save(newProduct);
+    console.log(newProduct);
     return newProduct;
   }
 }

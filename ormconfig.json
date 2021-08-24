@@ -7,9 +7,7 @@
    "database": "apivendas",
    "synchronize": true,
    "logging": false,
-   "entities": [
-      "src/entity/**/*.ts"
-   ],
+   "entities": ["./src/modules/**/typeorm/entities/*.ts"],
    "migrations": [
       "./src/share/typeorm/migrations/*.ts"
    ],

@@ -5,7 +5,7 @@ import routes from "../http/routes/index";
 import appError from "../errors/appError";
 import swaggerUI from "swagger-ui-express";
 import { swagger } from "../../../swagger";
-
+import "../typeorm";
 const app = express();
 
 app.use(cors());
