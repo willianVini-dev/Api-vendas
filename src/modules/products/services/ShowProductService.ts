@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import { productRepository } from "./../../typeorm/repositories/productsRepository";
-import product from "../../typeorm/entities/product";
+import { productRepository } from "../typeorm/repositories/productsRepository";
+import product from "../typeorm/entities/product";
 import appError from "../../../share/errors/appError";
 
 interface IResquest {

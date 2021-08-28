@@ -1,7 +1,7 @@
 import { getCustomRepository } from "typeorm";
 import appError from "../../../share/errors/appError";
-import product from "../../typeorm/entities/product";
-import { productRepository } from "./../../typeorm/repositories/productsRepository";
+import product from "../typeorm/entities/product";
+import { productRepository } from "../typeorm/repositories/productsRepository";
 interface IRequest {
   name: string;
   price: number;
@@ -21,7 +21,6 @@ export class createProductService {
       quantity,
     });
     await productsRepository.save(newProduct);
-    console.log(newProduct);
     return newProduct;
   }
 }
