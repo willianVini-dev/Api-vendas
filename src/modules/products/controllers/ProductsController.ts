@@ -7,33 +7,53 @@ import { Request, Response } from "express";
 
 export default class ProductsController {
   public async index(req: Request, res: Response): Promise<Response> {
-    const products = new ListProductService();
-    const list = await products.execute();
-    return res.status(200).json(list);
+    try {
+      const products = new ListProductService();
+      const list = await products.execute();
+      return res.json(list);
+    } catch (err) {
+      return res.status(500).json(err);
+    }
   }
   public async show(req: Request, res: Response): Promise<Response> {
-    const { id } = req.params;
-    const showProduct = new ShowProductService();
-    const list = await showProduct.execute({ id });
-    return res.json(list);
+    try {
+      const { id } = req.params;
+      const showProduct = new ShowProductService();
+      const list = await showProduct.execute({ id });
+      return res.json(list);
+    } catch (err) {
+      return res.status(500).json(err);
+    }
   }
   public async create(req: Request, res: Response): Promise<Response> {
-    const { name, price, quantity } = req.body;
-    const createProduct = new createProductService();
-    const create = await createProduct.execute({ name, price, quantity });
-    return res.json(create);
+    try {
+      const { name, price, quantity } = req.body;
+      const createProduct = new createProductService();
+      const create = await createProduct.execute({ name, price, quantity });
+      return res.json(create);
+    } catch (err) {
+      return res.status(500).json(err);
+    }
   }
   public async update(req: Request, res: Response): Promise<Response> {
-    const { id } = req.params;
-    const { name, price, quantity } = req.body;
-    const updateProduct = new UpdateProductService();
-    const update = await updateProduct.execute({ id, name, price, quantity });
-    return res.json(update);
+    try {
+      const { id } = req.params;
+      const { name, price, quantity } = req.body;
+      const updateProduct = new UpdateProductService();
+      const update = await updateProduct.execute({ id, name, price, quantity });
+      return res.json(update);
+    } catch (err) {
+      return res.status(500).json(err);
+    }
   }
   public async delete(req: Request, res: Response): Promise<Response> {
-    const { id } = req.params;
-    const deletProduct = new DeleteProductService();
-    await deletProduct.execute({ id });
-    return res.json([]);
+    try {
+      const { id } = req.params;
+      const deletProduct = new DeleteProductService();
+      await deletProduct.execute({ id });
+      return res.json([]);
+    } catch (err) {
+      return res.status(500).json(err);
+    }
   }
 }

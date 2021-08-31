@@ -18,7 +18,6 @@ class CreateUserServices {
     avatar,
   }: IRequest): Promise<User> {
     const userRespository = getCustomRepository(UserRespository);
-    console.log(avatar);
     const emailExist = await userRespository.findByEmail(email);
     if (emailExist) throw new appError("email já existe");
 

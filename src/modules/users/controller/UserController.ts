@@ -12,23 +12,31 @@ class UserController {
   }
 
   public async create(req: Request, res: Response): Promise<Response> {
-    const { name, email, password, avatar } = req.body;
-    if (!name || !email || !password)
-      throw new appError("Argumentos não validos");
+    try {
+      const { name, email, password, avatar } = req.body;
+      if (!name || !email || !password)
+        throw new appError("Argumentos não validos");
 
-    const user = new CreateUserServices();
-    const newUser = await user.execute({ name, email, password, avatar });
-    return res.json(newUser);
+      const user = new CreateUserServices();
+      const newUser = await user.execute({ name, email, password, avatar });
+      return res.json(newUser);
+    } catch (err) {
+      return res.status(401).json(err);
+    }
   }
 
   public async update(req: Request, res: Response): Promise<Response> {
-    const { id, name, email, password } = req.body;
-    if (!id || !name || !email || !password)
-      throw new appError("Paramentros invalidos");
+    try {
+      const { id, name, email, password } = req.body;
+      if (!id || !name || !email || !password)
+        throw new appError("Paramentros invalidos");
 
-    const update = new UpdateUserServices();
-    const updateUser = await update.execute({ id, name, email, password });
-    return res.json(updateUser);
+      const update = new UpdateUserServices();
+      const updateUser = await update.execute({ id, name, email, password });
+      return res.json(updateUser);
+    } catch (err) {
+      return res.status(401).json(err);
+    }
   }
 }
 export { UserController };
