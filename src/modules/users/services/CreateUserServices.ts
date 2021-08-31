@@ -1,3 +1,4 @@
+import { hash } from "bcryptjs";
 import { getCustomRepository } from "typeorm";
 import appError from "../../../share/errors/appError";
 import User from "../typeorm/entities/User";
@@ -20,10 +21,12 @@ class CreateUserServices {
     console.log(avatar);
     const emailExist = await userRespository.findByEmail(email);
     if (emailExist) throw new appError("email já existe");
+
+    const hashed = await hash(password, 8);
     const newUser = userRespository.create({
       name,
       email,
-      password,
+      password: hashed,
       avatar,
     });
     await userRespository.save(newUser);
