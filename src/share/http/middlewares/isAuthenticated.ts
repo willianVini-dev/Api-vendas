@@ -1,7 +1,13 @@
 import { Request, Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
-import appError from "../../../share/errors/appError";
+import appError from "../../errors/appError";
 import auth from "../../../config/auth";
+
+interface TokenPayload {
+  iat: number;
+  exp: number;
+  sub: string;
+}
 function isAuthenticated(
   req: Request,
   res: Response,
@@ -14,6 +20,11 @@ function isAuthenticated(
 
   try {
     const tokenDecode = verify(token, auth.jwt.secret);
+    const { sub } = tokenDecode as TokenPayload;
+
+    req.user = {
+      id: sub,
+    };
     return next();
   } catch (error) {
     throw new appError("JWT invalido");
