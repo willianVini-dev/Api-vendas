@@ -3,11 +3,19 @@ import { ListUserServices } from "../services/ListUserServices";
 import { CreateUserServices } from "../services/CreateUserServices";
 import appError from "../../../share/errors/appError";
 import { UpdateUserServices } from "../services/UpdateUserServices";
+import { UserOneServices } from "../services/UserOneServices";
 
 class UserController {
   public async index(req: Request, res: Response): Promise<Response> {
     const user = new ListUserServices();
     const list = await user.execute();
+    return res.json(list);
+  }
+
+  public async one(req: Request, res: Response): Promise<Response> {
+    const id = req.user.id;
+    const user = new UserOneServices();
+    const list = await user.execute({ id });
     return res.json(list);
   }
 
