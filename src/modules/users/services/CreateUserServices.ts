@@ -2,7 +2,7 @@ import { hash } from "bcryptjs";
 import { getCustomRepository } from "typeorm";
 import appError from "../../../share/errors/appError";
 import User from "../typeorm/entities/User";
-import { UserRespository } from "../typeorm/repositories/UsersRepository";
+import { UserRepository } from "../typeorm/repositories/UsersRepository";
 
 interface IRequest {
   name: string;
@@ -17,18 +17,18 @@ class CreateUserServices {
     password,
     avatar,
   }: IRequest): Promise<User> {
-    const userRespository = getCustomRepository(UserRespository);
-    const emailExist = await userRespository.findByEmail(email);
+    const userRepository = getCustomRepository(UserRepository);
+    const emailExist = await userRepository.findByEmail(email);
     if (emailExist) throw new appError("email já existe");
 
     const hashed = await hash(password, 8);
-    const newUser = userRespository.create({
+    const newUser = userRepository.create({
       name,
       email,
       password: hashed,
       avatar,
     });
-    await userRespository.save(newUser);
+    await userRepository.save(newUser);
     return newUser;
   }
 }

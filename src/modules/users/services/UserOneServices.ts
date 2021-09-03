@@ -1,7 +1,7 @@
 import { getCustomRepository } from "typeorm";
 import { string } from "joi";
 import User from "../typeorm/entities/User";
-import { UserRespository } from "../typeorm/repositories/UsersRepository";
+import { UserRepository } from "../typeorm/repositories/UsersRepository";
 
 interface IRequest {
   id: string;
@@ -9,8 +9,8 @@ interface IRequest {
 
 class UserOneServices {
   public async execute({ id }: IRequest): Promise<User | undefined> {
-    const userRespository = getCustomRepository(UserRespository);
-    const list = await userRespository.findById(id);
+    const userRepository = getCustomRepository(UserRepository);
+    const list = await userRepository.findById(id);
     return list;
   }
 }

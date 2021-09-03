@@ -1,7 +1,7 @@
 import { getCustomRepository } from "typeorm";
 import appError from "../../../share/errors/appError";
 import User from "../typeorm/entities/User";
-import { UserRespository } from "../typeorm/repositories/UsersRepository";
+import { UserRepository } from "../typeorm/repositories/UsersRepository";
 
 interface IRequest {
   id: string;
@@ -11,18 +11,18 @@ interface IRequest {
 }
 class UpdateUserServices {
   public async execute({ id, name, email, password }: IRequest): Promise<User> {
-    const userRespository = getCustomRepository(UserRespository);
-    const emailExist = await userRespository.findByEmail(email);
+    const userRepository = getCustomRepository(UserRepository);
+    const emailExist = await userRepository.findByEmail(email);
     if (emailExist) throw new appError("Email já existe");
 
-    const userId = await userRespository.findById(id);
+    const userId = await userRepository.findById(id);
     if (!userId) throw new appError("Usuario não existe");
 
     userId.name = name;
     userId.email = email;
     userId.password = password;
 
-    await userRespository.save(userId);
+    await userRepository.save(userId);
     return userId;
   }
 }

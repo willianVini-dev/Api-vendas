@@ -2,7 +2,7 @@ import path from "path";
 import { getCustomRepository } from "typeorm";
 import appError from "../../../share/errors/appError";
 import User from "../typeorm/entities/User";
-import { UserRespository } from "../typeorm/repositories/UsersRepository";
+import { UserRepository } from "../typeorm/repositories/UsersRepository";
 import uploadConfig from "../../../config/upload";
 import { promises } from "fs";
 
@@ -14,7 +14,7 @@ interface IRequest {
 class UploadAvatarServices {
   public async execute({ userID, avatarFile }: IRequest): Promise<User> {
     console.log(userID);
-    const userRepository = getCustomRepository(UserRespository);
+    const userRepository = getCustomRepository(UserRepository);
     const user = await userRepository.findById(userID);
 
     if (!user) throw new appError("Usúario não encontrado");

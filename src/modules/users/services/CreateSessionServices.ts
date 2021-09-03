@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
 import appError from "../../../share/errors/appError";
-import { UserRespository } from "../typeorm/repositories/UsersRepository";
+import { UserRepository } from "../typeorm/repositories/UsersRepository";
 import User from "../typeorm/entities/User";
 import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
@@ -15,7 +15,7 @@ interface IResponse {
 }
 class CreateSessionServices {
   public async execute({ email, password }: IRequest): Promise<IResponse> {
-    const userRepository = getCustomRepository(UserRespository);
+    const userRepository = getCustomRepository(UserRepository);
     const user = await userRepository.findByEmail(email);
     if (!user) throw new appError("Não cadastrado", 401);
 
